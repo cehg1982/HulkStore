@@ -1,0 +1,15 @@
+const ERROR='error ';
+const ALERT_CONSULTA='La consulta no retorna ningun resultado.';
+const ALERT_PROCESANDO='Procesando...';
+const CONSULTAR_PRODUCTOS='Consultar Productos';
+const REPORTAR_PRODUCTOS='Reportar Productos';
+const VENTA_PRODUCTOS='Venta Productos';
+const COMPRA_PRODUCTOS='Compra Productos';
+const ALERT_COMPRA_PRODUCTO='Se realizo la compra con éxito';
+const ALERT_VENTA_PRODUCTO='Se realizo la venta con éxito';
+const CREAR_PRODUCTO='Se registro el producto con éxito';
+const ERROR_CONSULTA_PRODUCTO='Error en consulta del producto';
+const ALERT_FILTROS_REPORTE_PRODUCTO='Es obligatorio el preiodo.';
+const ALERT_FILTROS_CONSULTA_PRODUCTO='Debe diligenciar los campos requeridos.';
+const ERROR_COMPRA_PRODUCTO='No se realizo la compra del prodcuto';
+const ERROR_VENTA_PRODUCTO='No se realizo la venta del prodcuto';

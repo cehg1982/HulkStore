@@ -1,0 +1,15 @@
+/*
+.alertify.ajs-no-padding:not(.ajs-maximized) .ajs-body{
+	margin-left: initial;
+    margin-right: initial;
+}
+*/
+
+.select2-dropdown.modalDropDown{
+	z-index: 1990;
+}
+
+.alertify.ajs-maximized .ajs-header, .alertify.ajs-resizable .ajs-header {
+	font-size: 18px;
+	padding: 12px 24px;
+}

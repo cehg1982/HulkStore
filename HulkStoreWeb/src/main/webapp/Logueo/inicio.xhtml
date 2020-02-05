@@ -1,0 +1,24 @@
+<ui:composition template="../templates/menu.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:sos-comp="http://components.sos.com.co/faces/core">
+
+	<!-- params for page titles -->
+	<ui:param name="pageTitle" value="Inicio" />
+	<!-- params for page form -->
+	<ui:param name="contentHeader" value="Inicio" />
+	<ui:define name="pageName">
+		<h:outputText value="#{contentHeader}" style="color: #FFFFFF;" />
+	</ui:define>
+	<ui:define name="content">
+		<ui:decorate template="../templates/menu.xhtml">
+			<!-- insert content here -->
+			<ui:define name="pageContent">
+			</ui:define>
+		</ui:decorate>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,13 @@
+.table-condensed{
+  font-size: 12px;
+}
+
+.hidden {
+     display:none;
+}
+
+div.dataTables_wrapper  div.dataTables_filter {
+  width: 100%;
+  float: none;
+  text-align: right;
+}

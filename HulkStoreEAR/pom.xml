@@ -1,0 +1,183 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.todo1.hulkstore</groupId>
+		<artifactId>HulkStoreParent</artifactId>
+		<relativePath>../HulkStoreParent/pom.xml</relativePath>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>HulkStoreParentEAR</artifactId>
+	<packaging>ear</packaging>
+	<name>HulkStoreParentEAR</name>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.todo1.hulkstore</groupId>
+			<artifactId>HulkStoreWeb</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>war</type>
+		</dependency>
+		
+ 		<!--dependency>
+			<groupId>com.todo1</groupId>
+			<artifactId>HulkStoreServices</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>war</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.ibm.websphere.appserver</groupId>
+			<artifactId>was_public</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency-->
+				
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.5</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+			
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-digester</groupId>
+			<artifactId>commons-digester</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.3</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+	
+		<dependency>
+	        <groupId>org.apache.poi</groupId>
+	        <artifactId>poi</artifactId>
+	        <version>3.10-FINAL</version>
+	        <type>jar</type>
+	    </dependency>
+    
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.10-FINAL</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-scratchpad</artifactId>
+			<version>3.10-FINAL</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-excelant</artifactId>
+			<version>3.10-FINAL</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>ant</artifactId>
+					<groupId>org.apache.ant</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+				
+	</dependencies>	
+	
+	
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+		
+			<plugin>
+			<groupId>org.apache.tomcat.maven</groupId>
+			 <artifactId>tomcat7-maven-plugin</artifactId>
+			 <version>2.2</version>
+			 <configuration>
+			 <path>/HulkStoreWeb</path>
+			 </configuration>
+			</plugin>
+		
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<version>6</version>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>		
+					<skinnyWars>true</skinnyWars>		
+					<modules>
+						<webModule>
+							<groupId>com.todo1.hulkstore</groupId>
+							<artifactId>HulkStoreWeb</artifactId>
+							<contextRoot>/HulkStoreWeb</contextRoot>
+						</webModule>
+ 						<!--webModule>
+							<groupId>com.todo1</groupId>
+							<artifactId>HulkStoreServices</artifactId>
+							<contextRoot>/HulkStoreServices</contextRoot>
+						</webModule-->
+					</modules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
