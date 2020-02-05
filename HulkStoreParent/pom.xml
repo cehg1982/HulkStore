@@ -16,12 +16,10 @@
 	</properties>
 
 	<modules>
-		<!-- module>../HulkStoreData/pom.xml</module>
+		<module>../HulkStoreData/pom.xml</module>
 		<module>../HulkStoreLogic/pom.xml</module>
 		<module>../HulkStoreWeb/pom.xml</module>
 		<module>../HulkStoreServices/pom.xml</module>
-		<module>../HulkStoreEAR/pom.xml</module> -->
-		<module>../HulkStoreWeb/pom.xml</module>
 		<module>../HulkStoreEAR/pom.xml</module>
 	</modules>
 
@@ -106,9 +104,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.0</version>
 					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
-						<encoding>ISO-8859-1</encoding>
+						<source>1.7</source>
+						<target>1.7</target>
 					</configuration>
 				</plugin>
 				<plugin>

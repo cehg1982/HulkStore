@@ -29,30 +29,6 @@
  		<error-code>404</error-code>
     	<location>/</location>
 	</error-page>
-	<security-constraint>
-		<display-name>seguridad_hulkstore</display-name>
-		<web-resource-collection>
-			<web-resource-name>web-resource-collection</web-resource-name>			
-			<url-pattern>/rest/*</url-pattern>
-			<http-method>GET</http-method>
-			<http-method>POST</http-method>
-			<http-method>PUT</http-method>
-			<http-method>DELETE</http-method>
-			<http-method>HEAD</http-method>
-			<http-method>TRACE</http-method>
-			<http-method>OPTIONS</http-method>
-		</web-resource-collection>
-		<auth-constraint>
-			<description>authconstraint1</description>
-			<role-name>USUARIOS_HULKSTOREWEB</role-name>
-		</auth-constraint>
-	</security-constraint>
-	<login-config>
-		<auth-method>BASIC</auth-method>
-	</login-config>
-	<security-role>
-		<role-name>USUARIOS_HULKSTOREWEB</role-name>
-	</security-role>
 	<session-config>
 		<session-timeout>60</session-timeout>
 	</session-config>

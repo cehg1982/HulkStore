@@ -4,7 +4,7 @@ jQuery('#btnCrear').on('click', function(e) {
 	if (jQuery('#inputNombreProducto').val()!="" && jQuery('#inputDscProducto').val()!=""
 		&& jQuery('#inputcntddStk').val()!=""){
 		crearProductosRest(function(data){
-			if(data[0].nmbrePrdcto!=null){
+			if(data!=null){
 				sessionStorage.productos = JSON.stringify(data);
 				var datosProducto = data;
 				alertify.success(CREAR_PRODUCTO);
