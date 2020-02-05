@@ -3,7 +3,7 @@
 jQuery('#btnReporte').on('click', function(e) {	
 	if (jQuery('#inputFechaDesde').val()!="" && jQuery('#inputFechaHasta').val()!=""){
 		reporteProductosRest(function(data){
-			if(data[0].nmbrePrdcto!=null){
+			if(data[0]!=null){
 				sessionStorage.productos = JSON.stringify(data);
 				var datosProducto = data;
 				

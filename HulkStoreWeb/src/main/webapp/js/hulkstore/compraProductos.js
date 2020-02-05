@@ -4,7 +4,7 @@ jQuery('#formCmprPrdcts').on('click', function(e) {
 	if (jQuery('#inputProducto').val()!="" && jQuery('#inputCantidad').val()!=""
 		&& jQuery('#inputprecio').val()!=""){
 		compraProductosRest(function(data){
-			if(data[0]!=null){
+			if(data!=null){
 				sessionStorage.productos = JSON.stringify(data);
 				var datosProducto = data;
 				alertify.success(ALERT_COMPRA_PRODUCTO);

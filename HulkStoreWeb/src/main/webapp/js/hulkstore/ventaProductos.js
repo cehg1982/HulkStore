@@ -4,7 +4,7 @@ jQuery('#btnVenta').on('click', function(e) {
 	if (jQuery('#inputProducto').val()!="" && jQuery('#inputCantidad').val()!=""
 		&& jQuery('#inputprecio').val()!=""){
 		ventaProductosRest(function(data){
-			if(data[0].nmbrePrdcto!=null){
+			if(data!=null){
 				sessionStorage.productos = JSON.stringify(data);
 				var datosProducto = data;			
 				alertify.success(ALERT_VENTA_PRODUCTO);

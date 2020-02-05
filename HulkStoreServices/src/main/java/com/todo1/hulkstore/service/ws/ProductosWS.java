@@ -54,7 +54,7 @@ public class ProductosWS extends AbstractWS implements Serializable{
 	@Path(ConstantesWeb.SLASH_REPORTE_PRODUCTOS)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(ConstantesWeb.APPLICATION_JSON_UTF_8)
-	public Response reporteProductos(@Context SecurityContext securityContext, @PathParam("cnsctvoPrdcto") Integer cnsctvoPrdcto, @PathParam("fchaInco") Date fchaInco, @PathParam("fchaFin") Date fchaFin ) {
+	public Response reporteProductos(@PathParam("cnsctvoPrdcto") Integer cnsctvoPrdcto, @PathParam("fchaInco") Date fchaInco, @PathParam("fchaFin") Date fchaFin ) {
 		HulkStoreController controller = new HulkStoreController();
 		List<ReporteProductosVO> lResultado= new ArrayList<ReporteProductosVO>();
 		try {
@@ -78,7 +78,7 @@ public class ProductosWS extends AbstractWS implements Serializable{
 	@Path(ConstantesWeb.SLASH_CREAR_PRODUCTOS)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(ConstantesWeb.APPLICATION_JSON_UTF_8)
-	public Response crearProductos(ProductoVO productoVO, @Context SecurityContext securityContext) {
+	public Response crearProductos(ProductoVO productoVO) {
 		HulkStoreController controller = new HulkStoreController();
 		try {
 			controller.crearProductos(productoVO);
@@ -102,7 +102,7 @@ public class ProductosWS extends AbstractWS implements Serializable{
 	@Path(ConstantesWeb.SLASH_COMPRA_PRODUCTOS)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(ConstantesWeb.APPLICATION_JSON_UTF_8)
-	public Response crearProductos(DetalleCompraProductoVO detalleCompraProductoVO, @Context SecurityContext securityContext) {
+	public Response crearProductos(DetalleCompraProductoVO detalleCompraProductoVO) {
 		HulkStoreController controller = new HulkStoreController();
 		try {
 			controller.compraProductos(detalleCompraProductoVO);
@@ -125,7 +125,7 @@ public class ProductosWS extends AbstractWS implements Serializable{
 	@Path(ConstantesWeb.SLASH_VENTA_PRODUCTOS)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(ConstantesWeb.APPLICATION_JSON_UTF_8)
-	public Response ventaProductos(DetalleVetaProductoVO detalleVetaProductoVO, @Context SecurityContext securityContext) {
+	public Response ventaProductos(DetalleVetaProductoVO detalleVetaProductoVO) {
 		HulkStoreController controller = new HulkStoreController();
 		try {
 			controller.ventaProductos(detalleVetaProductoVO);
