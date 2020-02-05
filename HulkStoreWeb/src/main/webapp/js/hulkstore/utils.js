@@ -144,6 +144,20 @@ function calcularEdad() {
 }
 
 
+//Obtiene el opcion menu seleccionado
+jQuery('#menu-dinamico').on('click', 'a', function(){
+	sessionStorage.menuOpcion=jQuery(this).attr('value');
+	
+	if (sessionStorage.menuOpcion=="1")
+		navegar(urlWeb+'productos.html', 'Crear Productos');
+	if (sessionStorage.menuOpcion=="2")
+		navegar(urlWeb+'compraProductos.html', 'Comprar Productos');
+	if (sessionStorage.menuOpcion=="3")
+		navegar(urlWeb+'ventaProductos.html', 'Venta Productos');
+	if (sessionStorage.menuOpcion=="4")
+		navegar(urlWeb+'reporteProductos.html', 'Reporte Productos');
+});
+
 
 
 
