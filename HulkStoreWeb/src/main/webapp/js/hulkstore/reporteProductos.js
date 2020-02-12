@@ -16,7 +16,8 @@ jQuery('#btnReporte').on('click', function(e) {
 					data: datosProducto,
 					columns: [		        
 						{ data: 'cnsctvoPrdcto' },
-						{ data: 'nmbrePrdcto'+' - '+'dscrpconPrdcto' },
+						{ data: 'nmbrePrdcto'},
+						{ data: 'dscrpconPrdcto'},
 						{ data: 'cntddStck' },
 					    { data: 'cntddCmpra' },
 						{ data: 'prcioCmpra' },

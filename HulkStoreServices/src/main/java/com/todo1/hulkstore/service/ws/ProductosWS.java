@@ -8,14 +8,11 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
 
 import org.apache.log4j.Logger;
 
@@ -52,7 +49,6 @@ public class ProductosWS extends AbstractWS implements Serializable{
 	 */
 	@GET
 	@Path(ConstantesWeb.SLASH_REPORTE_PRODUCTOS)
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(ConstantesWeb.APPLICATION_JSON_UTF_8)
 	public Response reporteProductos(@PathParam("cnsctvoPrdcto") Integer cnsctvoPrdcto, @PathParam("fchaInco") Date fchaInco, @PathParam("fchaFin") Date fchaFin ) {
 		HulkStoreController controller = new HulkStoreController();

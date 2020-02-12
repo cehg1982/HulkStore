@@ -26,107 +26,148 @@ GO
 * Nuevas Variables		 : <\VM   					VM\>
 * Fecha Modificacion	 : <\FM						FM\>
 *--------------------------------------------------------------------------------- */
---exec dbo.[spReporteProductos] 1, '2020-02-03', '2020-02-04'
-ALTER PROCEDURE dbo.[spReporteProductos] @cnsctvo_prdcto int, @fhcInco date, @fchFn date
+--exec dbo.[spReporteProductos] 1, '2020-01-01', '2020-02-13'
+ALTER PROCEDURE [dbo].[spReporteProductos] @cnsctvo_prdcto int, @fhcInco date, @fchFn date
 As
 
 BEGIN
 	SET NOCOUNT ON;
 
 	Declare
-	@tmptbReposteProductos table(
+	@tmptbReporteProductosComprados table(
 			cnsctvo_prdcto	int,
 			nmbre_prdcto	varchar(50),
 			dscrpcon_prdcto varchar(500),
 			cntdd_stck		int,
 			cntdd_cmpra		int,
-			cntdd_vnta		int,
 			prcio_cmpra		int,
+			total_cmpra		int
+	) 
+
+	Declare
+	@tmptbReporteProductosVendidos table(
+			cnsctvo_prdcto	int,
+			nmbre_prdcto	varchar(50),
+			dscrpcon_prdcto varchar(500),
+			cntdd_stck		int,
+			cntdd_vnta		int,
 			prcio_untro		int,
-			total_cmpra		int,
 			total_vnta		int,
 			utldd			int
 	) 
 
 	If @cnsctvo_prdcto is not null and @fhcInco is not null and @fchFn is not null
-	   INSERT INTO @tmptbReposteProductos
+	Begin
+	   INSERT INTO @tmptbReporteProductosComprados
 				   (cnsctvo_prdcto,
 					nmbre_prdcto,
 					dscrpcon_prdcto,
 					cntdd_stck,
 					cntdd_cmpra,
-					cntdd_vnta,
 					prcio_cmpra,
-					prcio_untro,
-					total_cmpra,
-					total_vnta,
-					utldd)
+					total_cmpra)
 	   SELECT		a.cnsctvo_prdcto,
 					a.nmbre_prdcto,
 					a.dscrpcon_prdcto,
 					a.cntdd_stck,
-					sum(b.cntdd),
-					sum(c.cntdd),
+					sum(b.cntdd) cntdd_cmprds,
 					b.prcio_cmpra,
-					c.prcio_untro,
-					sum(b.prcio_cmpra),
-					sum(c.prcio_untro),
-					sum(c.prcio_untro)-sum(b.prcio_cmpra)
+					(b.prcio_cmpra*sum(b.cntdd)) ttl_cmprds
 	   From			[dbo].tbproductos a
 	   Inner join	[dbo].[tbDetalleCompraProducto] b
 	   On			b.cnsctvo_prdcto=a.cnsctvo_prdcto
+	   Where		a.cnsctvo_prdcto=@cnsctvo_prdcto
+	   And			b.fcha_crcn between @fhcInco and @fchFn
+	   GROUP BY a.cnsctvo_prdcto, a.nmbre_prdcto, a.dscrpcon_prdcto, a.cntdd_stck, b.prcio_cmpra
+
+
+	   INSERT INTO @tmptbReporteProductosVendidos
+					(cnsctvo_prdcto,
+					nmbre_prdcto,
+					dscrpcon_prdcto,
+					cntdd_stck,
+					cntdd_vnta,
+					prcio_untro,
+					total_vnta)  
+	   SELECT		a.cnsctvo_prdcto,
+					a.nmbre_prdcto,
+					a.dscrpcon_prdcto,
+					a.cntdd_stck,
+					sum(c.cntdd),
+					c.prcio_untro,
+					(c.prcio_untro*sum(c.cntdd)) ttl_vnts
+					--(c.prcio_untro-a.prcio_cmpra)*sum(c.cntdd) utldd
+	   From			[dbo].tbproductos a
 	   Inner join	[dbo].[tbDetalleVentaProducto] c
 	   On			c.cnsctvo_prdcto=a.cnsctvo_prdcto
 	   Where		a.cnsctvo_prdcto=@cnsctvo_prdcto
-	   And			b.fcha_crcn between @fhcInco and @fchFn
 	   And			c.fcha_crcn between @fhcInco and @fchFn
-	   GROUP BY a.cnsctvo_prdcto, a.nmbre_prdcto, a.dscrpcon_prdcto, a.cntdd_stck, b.prcio_cmpra, c.prcio_untro 
+	   GROUP BY a.cnsctvo_prdcto, a.nmbre_prdcto, a.dscrpcon_prdcto, a.cntdd_stck, c.prcio_untro
+
+	End
 
 	If @cnsctvo_prdcto is null and @fhcInco is not null and @fchFn is not null
-	   INSERT INTO @tmptbReposteProductos
+	Begin
+	   INSERT INTO @tmptbReporteProductosComprados
 				   (cnsctvo_prdcto,
 					nmbre_prdcto,
 					dscrpcon_prdcto,
 					cntdd_stck,
 					cntdd_cmpra,
-					cntdd_vnta,
 					prcio_cmpra,
-					prcio_untro,
-					total_cmpra,
-					total_vnta,
-					utldd)
-		   SELECT	a.cnsctvo_prdcto,
+					total_cmpra)
+	   SELECT		a.cnsctvo_prdcto,
 					a.nmbre_prdcto,
 					a.dscrpcon_prdcto,
 					a.cntdd_stck,
-					sum(b.cntdd),
-					sum(c.cntdd),
+					sum(b.cntdd) cntdd_cmprds,
 					b.prcio_cmpra,
-					c.prcio_untro,
-					sum(b.prcio_cmpra),
-					sum(c.prcio_untro),
-					sum(c.prcio_untro)-sum(b.prcio_cmpra)
+					(b.prcio_cmpra*sum(b.cntdd)) ttl_cmprds
 	   From			[dbo].tbproductos a
 	   Inner join	[dbo].[tbDetalleCompraProducto] b
 	   On			b.cnsctvo_prdcto=a.cnsctvo_prdcto
+	   Where		b.fcha_crcn between @fhcInco and @fchFn
+	   GROUP BY a.cnsctvo_prdcto, a.nmbre_prdcto, a.dscrpcon_prdcto, a.cntdd_stck, b.prcio_cmpra
+
+
+	   INSERT INTO @tmptbReporteProductosVendidos
+					(cnsctvo_prdcto,
+					nmbre_prdcto,
+					dscrpcon_prdcto,
+					cntdd_stck,
+					cntdd_vnta,
+					prcio_untro,
+					total_vnta)  
+	   SELECT		a.cnsctvo_prdcto,
+					a.nmbre_prdcto,
+					a.dscrpcon_prdcto,
+					a.cntdd_stck,
+					sum(c.cntdd),
+					c.prcio_untro,
+					(c.prcio_untro*sum(c.cntdd)) ttl_vnts
+	   From			[dbo].tbproductos a
 	   Inner join	[dbo].[tbDetalleVentaProducto] c
 	   On			c.cnsctvo_prdcto=a.cnsctvo_prdcto
-	   Where		b.fcha_crcn between @fhcInco and @fchFn
-	   And			c.fcha_crcn between @fhcInco and @fchFn
-	   GROUP BY a.cnsctvo_prdcto, a.nmbre_prdcto, a.dscrpcon_prdcto, a.cntdd_stck, b.prcio_cmpra, c.prcio_untro
+	   Where		c.fcha_crcn between @fhcInco and @fchFn
+	   GROUP BY a.cnsctvo_prdcto, a.nmbre_prdcto, a.dscrpcon_prdcto, a.cntdd_stck, c.prcio_untro
 
-   Select	cnsctvo_prdcto,
-			nmbre_prdcto,
-			dscrpcon_prdcto,
-			cntdd_stck,
-			cntdd_cmpra,
-			cntdd_vnta,
-			prcio_cmpra,
-			prcio_untro,
-			total_cmpra,
-			total_vnta,
-			utldd
-	From	@tmptbReposteProductos
+	End
+
+   Select	a.cnsctvo_prdcto,
+			a.nmbre_prdcto,
+			a.dscrpcon_prdcto,
+			a.cntdd_stck,
+			a.cntdd_cmpra,
+			b.cntdd_vnta,
+			a.prcio_cmpra,
+			b.prcio_untro,
+			a.total_cmpra,
+			b.total_vnta,
+			(b.prcio_untro-a.prcio_cmpra)*sum(b.cntdd_vnta) utldd
+	From	@tmptbReporteProductosComprados a
+	Inner	join @tmptbReporteProductosVendidos b
+	On		a.cnsctvo_prdcto=b.cnsctvo_prdcto
+	GROUP BY a.cnsctvo_prdcto,a.nmbre_prdcto,a.dscrpcon_prdcto,a.cntdd_stck,a.cntdd_cmpra,b.cntdd_vnta,a.prcio_cmpra,b.prcio_untro,a.total_cmpra,b.total_vnta
 
 END
 GO

@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.todo1.hulkstore.data.model.ReporteProductosVO;
@@ -58,7 +59,7 @@ public class ReporteProductosDelegate implements  Serializable {
 
 	public void ejecutarData(Connection conn) throws SQLException  {
 		String query =RecursosUtil.getStringStoredprocedures(SP_REPORTE_PRODUCTOS);
-		
+		lResultado=new ArrayList<ReporteProductosVO>();
 		try (PreparedStatement stmt = conn.prepareStatement(query)) {
 			stmt.setInt(1, cnsctvoPrdcto);
 			stmt.setDate(2, fchaInco);

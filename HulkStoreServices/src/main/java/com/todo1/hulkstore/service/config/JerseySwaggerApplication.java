@@ -8,9 +8,9 @@ import io.swagger.jaxrs.config.BeanConfig;
 
 public class JerseySwaggerApplication extends ResourceConfig  {
 	private static final String BASE_DIR = "/HulkStoreServices/rest";
-	private static final String HOST = "localhost:9096";
+	private static final String HOST = "localhost:8080";
 	private static final String HTTP = "http";
-	private static final String PAQUETE_RECURSOS = "com.sos.hulkstore.service.ws";
+	private static final String PAQUETE_RECURSOS = "com.todo1.hulkstore.service.ws";
 	private static final String VERSION = "1.0.0";
 
 	public JerseySwaggerApplication(){

@@ -17,7 +17,6 @@ import com.todo1.hulkstore.data.model.ProductoVO;
 import com.todo1.hulkstore.data.model.ReporteProductosVO;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
-
 /**
  * The Class HulkStoreController.
  *
@@ -27,6 +26,18 @@ public class HulkStoreController {
 	/** The Constant LOGGER. */
 	private static final Logger LOGGER = Logger.getLogger(HulkStoreController.class);
 	
+	/** The Constant JDBC_STRGN. */
+	private static final String JDBC_STRGN = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; 
+	
+	/** The Constant CNXN_STRGN. */
+	private static final String CNXN_STRGN = "jdbc:sqlserver://localhost;databaseName=bdHulkStore;"; 
+
+	/** The Constant USER_BD. */
+	private static final String USER_BD = "user_HulkStore";
+	
+	/** The Constant PASS_BD. */
+	private static final String PASS_BD = "user_HulkStore";
+	
 	private Connection connProvider = null;
 
 	/**
@@ -35,6 +46,7 @@ public class HulkStoreController {
 	 * @param 
 	 * @return the list
 	 */
+	
 	public List<ReporteProductosVO> reporteProductos(Integer cnsctvoPrdcto, Date fchaInco, Date fchaFin)  {
 		try {
 			ReporteProductosDelegate delegate = new ReporteProductosDelegate();
@@ -46,7 +58,15 @@ public class HulkStoreController {
 			return delegate.getlResultado();
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
-		}
+		}finally {
+            try {
+                if (connProvider != null && !connProvider.isClosed()) {
+                	connProvider.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
 		return null;
 	}
 	
@@ -109,25 +129,15 @@ public class HulkStoreController {
 	public void conexionBD()  {
 		try {
 	        try { 
-	            String dbURL = "jdbc:sqlserver://localhost\\sqlexpress";
-	            String user = "user_HulkStore";
-	            String pass = "user_HulkStore";
-	            connProvider = DriverManager.getConnection(dbURL, user, pass);
+	            Class.forName(JDBC_STRGN);
+	            connProvider = DriverManager.getConnection(CNXN_STRGN,USER_BD,PASS_BD);
 	            if (connProvider != null) {
 	                DatabaseMetaData dm = (DatabaseMetaData) connProvider.getMetaData();
 	                System.out.println("Driver name: " + dm.getDriverName());
 	            }
 	        } catch (SQLException ex) {
 	            ex.printStackTrace();
-	        } finally {
-	            try {
-	                if (connProvider != null && !connProvider.isClosed()) {
-	                	connProvider.close();
-	                }
-	            } catch (SQLException ex) {
-	                ex.printStackTrace();
-	            }
-	        }
+	        } 
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
 		}
