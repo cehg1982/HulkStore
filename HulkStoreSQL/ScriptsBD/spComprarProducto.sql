@@ -26,8 +26,8 @@ GO
 * Nuevas Variables		 : <\VM   					VM\>
 * Fecha Modificacion	 : <\FM						FM\>
 *--------------------------------------------------------------------------------- */
---exec dbo.[spComprarProducto] '{"cnsctvo_prdcto": 1, "cntdd": 2, "prcio_cmpra": 20000, "usro_crcn":"user_HulkStore"}'
-ALTER PROCEDURE dbo.[spComprarProducto] @jsonPrdcto varchar(max)
+--exec dbo.[spComprarProducto] '{"cnsctvoPrdcto":4,"cntdd":10,"prcoCmpra":5000,"usroCrcn":"user_HulkStore"}'
+ALTER PROCEDURE [dbo].[spComprarProducto] @jsonPrdcto varchar(max)
 As
 
 BEGIN
@@ -54,10 +54,10 @@ BEGIN
            ,JsonData.usro_crcn
   FROM OPENJSON(@jsonPrdcto)
    WITH (
-			cnsctvo_prdcto INT		'$.cnsctvo_prdcto',
+			cnsctvo_prdcto INT		'$.cnsctvoPrdcto',
 			cntdd INT				'$.cntdd',
-			prcio_cmpra INT			'$.prcio_cmpra',
-			usro_crcn VARCHAR(20)	'$.usro_crcn'
+			prcio_cmpra INT			'$.prcoCmpra',
+			usro_crcn VARCHAR(20)	'$.usroCrcn'
   ) AS JsonData;
 
   INSERT INTO dbo.tbDetalleCompraProducto

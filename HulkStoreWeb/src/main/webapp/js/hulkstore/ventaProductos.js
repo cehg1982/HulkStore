@@ -23,20 +23,20 @@ function ventaProductosRest(callback){
 
 	var detalleVetaProductoVO= {cnsctvoPrdcto	: '',
 								 cntdd			: '',
-								 prcoCmpra		: '',
+								 prcoUntro		: '',
 								 fchaCrcn		: '',	
 								 usroCrcn		: ''
 								};
 
 	detalleVetaProductoVO.cnsctvoPrdcto=jQuery('#inputProducto').val();
 	detalleVetaProductoVO.cntdd=jQuery('#inputCantidad').val();
-	detalleVetaProductoVO.prcoCmpra=jQuery('#inputprecio').val();
+	detalleVetaProductoVO.prcoUntro=jQuery('#inputprecio').val();
 	detalleVetaProductoVO.usroCrcn='user_HulkStore';
 	
 	sessionStorage.detalleVetaProductoVO=JSON.stringify(detalleVetaProductoVO);
 	
 	jQuery.ajax({
-		url: urlServiciosWeb+'ProductosWS/CompraProductos/',
+		url: urlServiciosWeb+'ProductosWS/VentaProductos/',
 		type: 'POST',
 		dataType: 'json',
 		contentType: "application/json",

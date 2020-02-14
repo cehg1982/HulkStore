@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +62,13 @@ public class ReporteProductosDelegate implements  Serializable {
 		String query =RecursosUtil.getStringStoredprocedures(SP_REPORTE_PRODUCTOS);
 		lResultado=new ArrayList<ReporteProductosVO>();
 		try (PreparedStatement stmt = conn.prepareStatement(query)) {
-			stmt.setInt(1, cnsctvoPrdcto);
+			
+			if( cnsctvoPrdcto  == null ){
+		    	stmt.setNull(1, Types.INTEGER);
+		    }else{
+		    	stmt.setInt(1,cnsctvoPrdcto);        	
+		    }
+			
 			stmt.setDate(2, fchaInco);
 			stmt.setDate(3, fchaFin);
 		

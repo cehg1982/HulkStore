@@ -16,8 +16,11 @@ jQuery('#btnReporte').on('click', function(e) {
 					data: datosProducto,
 					columns: [		        
 						{ data: 'cnsctvoPrdcto' },
-						{ data: 'nmbrePrdcto'},
-						{ data: 'dscrpconPrdcto'},
+						{data: null,
+		                render: function ( data, type, row ) {
+		                    return data.nmbrePrdcto+' '+data.dscrpconPrdcto;
+		                },
+		                editField: ['nmbrePrdcto']},
 						{ data: 'cntddStck' },
 					    { data: 'cntddCmpra' },
 						{ data: 'prcioCmpra' },
@@ -48,12 +51,23 @@ jQuery('#btnReporte').on('click', function(e) {
 
 //Servicio consulta productos
 function reporteProductosRest(callback){
-
-	jQuery.ajax({
-		url: urlServiciosWeb+'ProductosWS/ReporteProductos/'
+	
+	var urlConsulta;
+	
+	if (jQuery('#inputProducto').val() !=""){
+		urlConsulta=urlServiciosWeb+'ProductosWS/ReporteProductos/'
 		+jQuery('#inputProducto').val()+'/'
 		+jQuery('#inputFechaDesde').val()+'/'
-		+jQuery('#inputFechaHasta').val(),
+		+jQuery('#inputFechaHasta').val();
+
+	}else{
+		urlConsulta=urlServiciosWeb+'ProductosWS/ReporteProductos/0/'
+		+jQuery('#inputFechaDesde').val()+'/'
+		+jQuery('#inputFechaHasta').val();
+	}
+	
+	jQuery.ajax({
+		url: urlConsulta,
 		data: {},
 		type: 'GET',
         dataType: 'json',

@@ -1,6 +1,6 @@
 
-//valida venta productos
-jQuery('#formCmprPrdcts').on('click', function(e) {	
+//valida compra productos
+jQuery('#btnComprar').on('click', function(e) {	
 	if (jQuery('#inputProducto').val()!="" && jQuery('#inputCantidad').val()!=""
 		&& jQuery('#inputprecio').val()!=""){
 		compraProductosRest(function(data){
@@ -45,6 +45,8 @@ function compraProductosRest(callback){
         delay: 300
 	}).done(function(response){
 		callback(response);
+		alertify.success(ALERT_COMPRA_PRODUCTO);
+		console.log(ALERT_COMPRA_PRODUCTO);
 	}).fail(function(response){
 		callback({});
 	});	

@@ -81,10 +81,18 @@ public class HulkStoreController {
 			ProductosDelegate delegate = new ProductosDelegate();
 			delegate.setProductoVO(productoVO); 
 			conexionBD();
-			delegate.ejecutarData(connProvider);
+			delegate.ejecutarData(connProvider);		
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
-		}
+		}finally {
+            try {
+                if (connProvider != null && !connProvider.isClosed()) {
+                	connProvider.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
 	}
 	
 	/**
@@ -101,7 +109,15 @@ public class HulkStoreController {
 			delegate.ejecutarData(connProvider);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
-		}
+		}finally {
+            try {
+                if (connProvider != null && !connProvider.isClosed()) {
+                	connProvider.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
 	}
 	
 	/**
@@ -118,7 +134,15 @@ public class HulkStoreController {
 			delegate.ejecutarData(connProvider);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
-		}
+		}finally {
+            try {
+                if (connProvider != null && !connProvider.isClosed()) {
+                	connProvider.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
 	}
 	
 	

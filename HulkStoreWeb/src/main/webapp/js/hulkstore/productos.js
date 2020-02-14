@@ -49,14 +49,17 @@ function crearProductosRest(callback){
         delay: 300
 	}).done(function(response){
 		callback(response);
+		alertify.success(CREAR_PRODUCTO);
+		console.log(CREAR_PRODUCTO);
 	}).fail(function(response){
 		callback({});
+		console.log(ERROR_CREAR_PRODUCTO);
 	});	
 }
 
 
 //Limpia los campos
-function limpiarCnslta(){	
+function limpiarCmpsPrdto(){	
 	jQuery("#formPrdcts")[0].reset();
 }
 

@@ -53,6 +53,8 @@ public class ProductosWS extends AbstractWS implements Serializable{
 	public Response reporteProductos(@PathParam("cnsctvoPrdcto") Integer cnsctvoPrdcto, @PathParam("fchaInco") Date fchaInco, @PathParam("fchaFin") Date fchaFin ) {
 		HulkStoreController controller = new HulkStoreController();
 		List<ReporteProductosVO> lResultado= new ArrayList<ReporteProductosVO>();
+		if (cnsctvoPrdcto.equals(0)) 
+			cnsctvoPrdcto=null;
 		try {
 			lResultado = controller.reporteProductos(cnsctvoPrdcto, fchaInco, fchaFin);
 		}catch (Exception e) {
@@ -84,7 +86,7 @@ public class ProductosWS extends AbstractWS implements Serializable{
 					.entity(ConstantesWeb.API_RESPONSE_MESSAGE)
 					.build();
 		}
-	 return Response.status(204).build();
+	 return Response.status(201).build();
 	}
 	
 	
@@ -98,7 +100,7 @@ public class ProductosWS extends AbstractWS implements Serializable{
 	@Path(ConstantesWeb.SLASH_COMPRA_PRODUCTOS)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(ConstantesWeb.APPLICATION_JSON_UTF_8)
-	public Response crearProductos(DetalleCompraProductoVO detalleCompraProductoVO) {
+	public Response crompraProductos(DetalleCompraProductoVO detalleCompraProductoVO) {
 		HulkStoreController controller = new HulkStoreController();
 		try {
 			controller.compraProductos(detalleCompraProductoVO);
@@ -108,7 +110,7 @@ public class ProductosWS extends AbstractWS implements Serializable{
 					.entity(ConstantesWeb.API_RESPONSE_MESSAGE)
 					.build();
 		}
-	 return Response.status(204).build();
+	 return Response.status(201).build();
 	}
 	
 	/**
@@ -131,7 +133,7 @@ public class ProductosWS extends AbstractWS implements Serializable{
 					.entity(ConstantesWeb.API_RESPONSE_MESSAGE)
 					.build();
 		}
-	 return Response.status(204).build();
+	 return Response.status(201).build();
 	}
 	
 }

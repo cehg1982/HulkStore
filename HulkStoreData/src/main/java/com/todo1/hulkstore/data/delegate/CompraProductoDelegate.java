@@ -33,7 +33,7 @@ public class CompraProductoDelegate implements  Serializable {
 			Gson gson = new Gson();
 			String prdctoJSON = gson.toJson(detalleCompraProductoVO);
 			stmt.setString(1, prdctoJSON);			
-			stmt.executeQuery();
+			stmt.executeUpdate();
 		}
 	}
 
