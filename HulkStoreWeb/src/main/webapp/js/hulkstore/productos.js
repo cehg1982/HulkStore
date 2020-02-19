@@ -35,7 +35,6 @@ function crearProductosRest(callback){
 	
 	productoVO.nmbrePrdcto=jQuery('#inputNombreProducto').val();
 	productoVO.dscrpconPrdcto=jQuery('#inputDscProducto').val();
-	productoVO.cntddStck=jQuery('#inputcntddStk').val();
 	productoVO.usroCrcn='user_HulkStore';
 	
 	sessionStorage.productoVO=JSON.stringify(productoVO);
