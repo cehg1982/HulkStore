@@ -112,18 +112,27 @@ GO
 
 /* Create Tables */
 
-CREATE TABLE [dbo].[tbProductos]
+CREATE TABLE [dbo].[tbProductos](
+	[cnsctvo_prdcto] [int] IDENTITY(1,1) NOT NULL,
+	[nmbre_prdcto] [varchar](50) NOT NULL,
+	[dscrpcon_prdcto] [varchar](500) NULL,
+	[cntdd_stck] [int] NOT NULL,
+	[stado] [varchar](1) NULL,
+	[fcha_crcn] [datetime] NULL,
+	[usro_crcn] [varchar](20) NOT NULL,
+	[fcha_ultma_mdfccn] [datetime] NULL,
+	[usro_ultma_mdfccn] [varchar](20) NULL,
+ CONSTRAINT [PK_tbProductos] PRIMARY KEY CLUSTERED 
 (
-	[cnsctvo_prdcto] int identity NOT NULL,
-	[nmbre_prdcto] varchar(50) NOT NULL,   
-	[dscrpcon_prdcto] varchar(500) NULL,  
-	[cntdd_stck]  int NOT NULL, 
-	[stado] varchar(1)DEFAULT 'A',  
-	[fcha_crcn] datetime DEFAULT GETDATE(),    
-	[usro_crcn] varchar(20) NOT NULL,   
-	[fcha_ultma_mdfccn] datetime DEFAULT GETDATE(),   
-	[usro_ultma_mdfccn] varchar(20)  NULL  
-)
+	[cnsctvo_prdcto] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tbProductos] ADD  DEFAULT ('A') FOR [stado]
+GO
+
+ALTER TABLE [dbo].[tbProductos] ADD  DEFAULT (getdate()) FOR [fcha_crcn]
 GO
 
 use [bdHulkStore]
@@ -151,15 +160,28 @@ GO
 GRANT UPDATE ON [dbo].[tbProductos] TO [user_HulkStore]
 GO
 
-CREATE TABLE [dbo].[tbDetalleCompraProducto]
+CREATE TABLE [dbo].[tbDetalleCompraProducto](
+	[cnsctvo_cdgo_cmpra_prdcto] [int] IDENTITY(1,1) NOT NULL,
+	[cnsctvo_prdcto] [int] NOT NULL,
+	[cntdd] [int] NOT NULL,
+	[prcio_cmpra] [int] NOT NULL,
+	[fcha_crcn] [datetime] NULL,
+	[usro_crcn] [varchar](20) NOT NULL,
+ CONSTRAINT [PK_tbDetalleCompraProducto] PRIMARY KEY CLUSTERED 
 (
-	[cnsctvo_cdgo_cmpra_prdcto] int identity NOT NULL, 
-	[cnsctvo_prdcto] int NOT NULL,
-	[cntdd]  int NOT NULL, 
-	[prcio_cmpra]  int NOT NULL,
-	[fcha_crcn] datetime DEFAULT GETDATE(),  
-	[usro_crcn] varchar(20) NOT NULL
-)
+	[cnsctvo_cdgo_cmpra_prdcto] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tbDetalleCompraProducto] ADD  DEFAULT (getdate()) FOR [fcha_crcn]
+GO
+
+ALTER TABLE [dbo].[tbDetalleCompraProducto]  WITH CHECK ADD  CONSTRAINT [FK_tbDetalleCompraProducto_tbProductos] FOREIGN KEY([cnsctvo_prdcto])
+REFERENCES [dbo].[tbProductos] ([cnsctvo_prdcto])
+GO
+
+ALTER TABLE [dbo].[tbDetalleCompraProducto] CHECK CONSTRAINT [FK_tbDetalleCompraProducto_tbProductos]
 GO
 
 use [bdHulkStore]
@@ -187,15 +209,28 @@ GO
 GRANT UPDATE ON [dbo].[tbDetalleCompraProducto] TO [user_HulkStore]
 GO
 
-CREATE TABLE [dbo].[tbDetalleVentaProducto]
+CREATE TABLE [dbo].[tbDetalleVentaProducto](
+	[cnsctvo_cdgo_vnta_prdcto] [int] IDENTITY(1,1) NOT NULL,
+	[cnsctvo_prdcto] [int] NOT NULL,
+	[cntdd] [int] NOT NULL,
+	[prcio_untro] [int] NOT NULL,
+	[fcha_crcn] [datetime] NULL,
+	[usro_crcn] [varchar](20) NOT NULL,
+ CONSTRAINT [PK_tbDetalleVentaProducto] PRIMARY KEY CLUSTERED 
 (
-	[cnsctvo_cdgo_vnta_prdcto] int identity NOT NULL, 
-	[cnsctvo_prdcto] int NOT NULL,
-	[cntdd]  int NOT NULL, 
-	[prcio_untro]  int NOT NULL,
-	[fcha_crcn] datetime DEFAULT GETDATE(), 
-	[usro_crcn] varchar(20) NOT NULL
-	)
+	[cnsctvo_cdgo_vnta_prdcto] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tbDetalleVentaProducto] ADD  DEFAULT (getdate()) FOR [fcha_crcn]
+GO
+
+ALTER TABLE [dbo].[tbDetalleVentaProducto]  WITH CHECK ADD  CONSTRAINT [FK_tbDetalleVentaProducto_tbProductos] FOREIGN KEY([cnsctvo_prdcto])
+REFERENCES [dbo].[tbProductos] ([cnsctvo_prdcto])
+GO
+
+ALTER TABLE [dbo].[tbDetalleVentaProducto] CHECK CONSTRAINT [FK_tbDetalleVentaProducto_tbProductos]
 GO
 
 use [bdHulkStore]
