@@ -89,6 +89,30 @@ public class ProductosWS extends AbstractWS implements Serializable{
 	 return Response.status(201).build();
 	}
 	
+	/**
+	 * consultar Productos.
+	 *
+	 * @param securityContext the security context
+	 * @return the response
+	 */
+	@GET
+	@Path(ConstantesWeb.SLASH_CONSULTA_PRODUCTOS)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(ConstantesWeb.APPLICATION_JSON_UTF_8)
+	public Response consultarProductos() {
+		HulkStoreController controller = new HulkStoreController();
+		List<ProductoVO> lResultado= new ArrayList<ProductoVO>();
+		try {
+			lResultado=controller.consultarProductos();
+		}catch (Exception e) {
+			LOGGER.error(e.getMessage(), e);
+			return Response.status(new CustomErrorRequest(ConstantesWeb.CODE_API_RESPONSE_INT_500, ConstantesWeb.API_RESPONSE_500))
+					.entity(ConstantesWeb.API_RESPONSE_MESSAGE)
+					.build();
+		}
+		return Response.status(200).entity(lResultado).build();
+	}
+	
 	
 	/**
 	 * comprar Productos.
@@ -100,7 +124,7 @@ public class ProductosWS extends AbstractWS implements Serializable{
 	@Path(ConstantesWeb.SLASH_COMPRA_PRODUCTOS)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(ConstantesWeb.APPLICATION_JSON_UTF_8)
-	public Response crompraProductos(DetalleCompraProductoVO detalleCompraProductoVO) {
+	public Response compraProductos(DetalleCompraProductoVO detalleCompraProductoVO) {
 		HulkStoreController controller = new HulkStoreController();
 		try {
 			controller.compraProductos(detalleCompraProductoVO);

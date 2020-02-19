@@ -12,6 +12,7 @@ public class ConstantesWeb {
 	public static final String SLASH_CREAR_PRODUCTOS = "/CrearProductos";
 	public static final String SLASH_COMPRA_PRODUCTOS = "/CompraProductos";
 	public static final String SLASH_VENTA_PRODUCTOS = "/VentaProductos";
+	public static final String SLASH_CONSULTA_PRODUCTOS = "/ConsultaProductos";
 	
 	/** The Constant API_RESPONSE_403. */
 	public static final String CODE_API_RESPONSE_403 = "403";

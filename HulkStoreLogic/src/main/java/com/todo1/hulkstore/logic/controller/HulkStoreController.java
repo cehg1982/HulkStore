@@ -15,6 +15,7 @@ import com.todo1.hulkstore.data.model.DetalleCompraProductoVO;
 import com.todo1.hulkstore.data.model.DetalleVetaProductoVO;
 import com.todo1.hulkstore.data.model.ProductoVO;
 import com.todo1.hulkstore.data.model.ReporteProductosVO;
+
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 /**
@@ -74,14 +75,14 @@ public class HulkStoreController {
 	 * crear productos.
 	 *
 	 * @param 
-	 * @return the list
+	 * 
 	 */
 	public void crearProductos(ProductoVO productoVO)  {
 		try {
 			ProductosDelegate delegate = new ProductosDelegate();
 			delegate.setProductoVO(productoVO); 
 			conexionBD();
-			delegate.ejecutarData(connProvider);		
+			delegate.crearproducto(connProvider);		
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
 		}finally {
@@ -93,6 +94,32 @@ public class HulkStoreController {
                 ex.printStackTrace();
             }
         }
+	}
+	
+	/**
+	 * consultar productos.
+	 *
+	 * @param 
+	 * @return the list
+	 */
+	public List<ProductoVO> consultarProductos()  {
+		try {
+			ProductosDelegate delegate = new ProductosDelegate();
+			conexionBD();
+			delegate.consultarproducto(connProvider);		
+			return delegate.getlResultado();
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage(), e);
+		}finally {
+            try {
+                if (connProvider != null && !connProvider.isClosed()) {
+                	connProvider.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+		return null;
 	}
 	
 	/**

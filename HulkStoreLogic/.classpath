@@ -40,5 +40,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/SOS/sqljdbc_6.0/enu/jre7/sqljdbc41.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

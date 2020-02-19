@@ -1,5 +1,5 @@
 
-//valida consulta productos
+//valida creacion productos
 jQuery('#btnCrear').on('click', function(e) {	
 	if (jQuery('#inputNombreProducto').val()!="" && jQuery('#inputDscProducto').val()!=""
 		&& jQuery('#inputcntddStk').val()!=""){
@@ -19,7 +19,7 @@ jQuery('#btnCrear').on('click', function(e) {
 	}
 });	
 
-//Servicio consulta productos
+//Servicio crear productos
 function crearProductosRest(callback){
 	
 	var productoVO= {cnsctvoPrdcto		: '',

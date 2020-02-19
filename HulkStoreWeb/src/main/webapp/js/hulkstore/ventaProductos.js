@@ -1,3 +1,20 @@
+//Se invoca servicio para obtener los productos
+function consultarProductos(){
+	jQuery.ajax({
+		async: false,
+		url: urlServiciosWeb+'ProductosWS/ConsultaProductos/',
+		data: {},
+		type: 'GET',
+        dataType: 'json',
+        delay: 300
+    }).done(function (response) {    	
+    	 window.datosAutoCompletarprodcutos = jQuery.map(response,function(obj){
+			return {id: obj.cnsctvoPrdcto, text: obj.nmbrePrdcto};
+		});
+    }).fail(function () {					    	
+    	console.log(ERROR_CONSULTA_PRODUCTO);
+    });
+}
 
 //valida venta productos
 jQuery('#btnVenta').on('click', function(e) {	
@@ -28,7 +45,7 @@ function ventaProductosRest(callback){
 								 usroCrcn		: ''
 								};
 
-	detalleVetaProductoVO.cnsctvoPrdcto=jQuery('#inputProducto').val();
+	detalleVetaProductoVO.cnsctvoPrdcto=jQuery('#selectProducto :selected').val();
 	detalleVetaProductoVO.cntdd=jQuery('#inputCantidad').val();
 	detalleVetaProductoVO.prcoUntro=jQuery('#inputprecio').val();
 	detalleVetaProductoVO.usroCrcn='user_HulkStore';
@@ -57,5 +74,13 @@ function limpiarCnslta(){
 
 //Funcion principal
 jQuery(document).ready(function() {	
+	consultarProductos();
+	jQuery('#selectProducto').select2({		
+		allowClear: true,
+		maximunSelectionSize: 1,
+		placeholder: "Productos...",
+		data: window.datosAutoCompletarprodcutos,				
+		minimumInputLength: 3
+	});
 	console.log(VENTA_PRODUCTOS)
 });
