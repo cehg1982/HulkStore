@@ -116,7 +116,7 @@ CREATE TABLE [dbo].[tbProductos](
 	[cnsctvo_prdcto] [int] IDENTITY(1,1) NOT NULL,
 	[nmbre_prdcto] [varchar](50) NOT NULL,
 	[dscrpcon_prdcto] [varchar](500) NULL,
-	[cntdd_stck] [int] NOT NULL,
+	[cntdd_stck] [int]  NULL,
 	[stado] [varchar](1) NULL,
 	[fcha_crcn] [datetime] NULL,
 	[usro_crcn] [varchar](20) NOT NULL,
