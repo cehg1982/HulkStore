@@ -73,7 +73,7 @@ BEGIN
   FROM     @tmptbDetalleCompraProducto
 
   Update a
-  Set	a.cntdd_stck=a.cntdd_stck+b.cntdd
+  Set	a.cntdd_stck=isnull(a.cntdd_stck,0)+b.cntdd
   From	dbo.tbProductos a
   Inner join @tmptbDetalleCompraProducto b
   On	b.cnsctvo_prdcto=a.cnsctvo_prdcto
