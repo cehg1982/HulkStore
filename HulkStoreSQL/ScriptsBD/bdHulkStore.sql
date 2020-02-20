@@ -243,7 +243,7 @@ GRANT CONTROL ON [dbo].[tbDetalleVentaProducto] TO [user_HulkStore]
 GO
 use [bdHulkStore]
 GO
-GRANT DELETE ON [dbo].[tbDetalleVentaProducto] TO [user_HulkStore]2
+GRANT DELETE ON [dbo].[tbDetalleVentaProducto] TO [user_HulkStore]
 GO
 use [bdHulkStore]
 GO
