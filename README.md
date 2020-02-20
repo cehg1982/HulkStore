@@ -15,10 +15,10 @@ https://github.com/cehg1982/HulkStore/tree/master/HulkStoreEAR
 https://github.com/cehg1982/HulkStore/tree/master/HulkStoreParent
 
 Despliegue en Servidor de Desarrollo
-En nuestro IDE corremos el proyecto importado HulkStoreServices con clic derecho sobre él, Run As - Run On Server y luego
-corremos igualmente el proyecto importado HulkStoreWeb con clic derecho sobre él, Run As - Run On Server y Listo.
+En nuestro IDE corremos el proyecto importado HulkStoreServices con click derecho sobre él, Run As - Run On Server y luego
+corremos igualmente el proyecto importado HulkStoreWeb con click derecho sobre él, Run As - Run On Server y Listo.
 
 Abrimos la aplicacion en nuestro explorador con la url: http://localhost:8080/HulkStoreWeb/view/hulkstore/aplicacion.html.
 
 Despliegue en otros ambientes:
-Se genera el Archivo de despliegue .EAR que se genera en el modulo HulkStoreEAR con clic derecho sobre él, Run As - Maven install y se despliega en el servidor deseado.
+Se genera el Archivo de despliegue .EAR que se genera en el modulo HulkStoreEAR con click derecho sobre él, Run As - Maven install y se despliega en el servidor deseado.
